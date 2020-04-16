@@ -1,0 +1,11 @@
+POST http://localhost:8080/messages
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "pageId" : "FIRST_PAGE",
+  "text" : "Bye!"
+}
+
+###
