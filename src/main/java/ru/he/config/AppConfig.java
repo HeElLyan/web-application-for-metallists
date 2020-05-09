@@ -9,6 +9,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
@@ -16,6 +19,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -41,6 +45,7 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "ru.he.repositoriesJpa")
 @EnableTransactionManagement
 @EnableWebSecurity
+@EnableJdbcHttpSession
 //@EnableWebMvc
 public class AppConfig{
 
@@ -66,6 +71,12 @@ public class AppConfig{
 //    public void addResourceHandlers(ResourceHandlerRegistry resourceHandlerRegistry){
 //        resourceHandlerRegistry.addResourceHandler()
 //    }
+
+    @Bean
+    public EmbeddedDatabase dataSource() {
+        return new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2).addScript("org/springframework/session/jdbc/schema-h2.sql").build();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

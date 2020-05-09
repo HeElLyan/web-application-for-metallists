@@ -72,14 +72,13 @@ public class ChatController {
 
         Optional<Band> band = bandRepository.findById(bandId);
         modelAndView.addObject("band", band.get());
-//        modelAndView.addObject("post", postRepository.findById(bandId).orElseThrow(IllegalArgumentException::new));
         return modelAndView;
     }
 
 //    @PostMapping(name="/chat", value = "/chat", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     @PostMapping("/chat")
     @ResponseStatus(value = HttpStatus.OK)
-    public void receiveMessage(@RequestParam("band_id") Long bandId, @RequestParam("text") String text, Authentication authentication, @ModelAttribute("model") ModelMap model) {
+    public void receiveMessage(@RequestParam("band_id") Long bandId, @RequestParam("text") String text, Authentication authentication,ModelMap model) {
         UserDetailsImpl details = (UserDetailsImpl)authentication.getPrincipal();
         UserDto userBySession = from(details.getUser());
 
@@ -93,6 +92,7 @@ public class ChatController {
                 .createdAt(timeResolver.now())
                 .build();
 
+//        model.addAttribute("message", message);
         messageRepository.save(message);
 
         bandId = cashedIdPool.cashedOf(bandId);

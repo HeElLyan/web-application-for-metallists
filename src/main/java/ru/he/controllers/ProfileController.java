@@ -18,6 +18,7 @@ import ru.he.repositoriesJpa.UsersRepository;
 import ru.he.security.details.UserDetailsImpl;
 import ru.he.services.FileInfoService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.Collections;
@@ -37,6 +38,14 @@ public class ProfileController {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, Authentication authentication) {
+        if (authentication != null) {
+            request.getSession().invalidate();
+        }
+        return "redirect:/login";
+    }
 
     @GetMapping("/")
     public String getProfilePage(@ModelAttribute("model") ModelMap model, Authentication authentication) {

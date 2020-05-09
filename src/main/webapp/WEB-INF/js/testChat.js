@@ -11,7 +11,7 @@ function sendMessage(pageId, text) {
         contentType: "application/json",
         dataType: "json",
         complete: function () {
-            if (text === 'Login') {
+            if (text === 'New user') {
                 receiveMessage(pageId)
             }
         }

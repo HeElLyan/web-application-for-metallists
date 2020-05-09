@@ -12,8 +12,8 @@
             crossorigin="anonymous"></script>
     <script src="/WebApplicationForMetallists_war/res/js/testChat.js"></script>
 </head>
-<body onload="sendMessage('${pageId}', 'Login')">
-<h1>Ваш идентификатор - ${pageId}</h1>
+<body onload="sendMessage('${pageId}', 'New user')">
+<h1>Welcome to nu-metal band - Slipknot!</h1>
 <div>
     <input id="message" placeholder="Ваше сообщение">
     <button onclick="sendMessage('${pageId}',

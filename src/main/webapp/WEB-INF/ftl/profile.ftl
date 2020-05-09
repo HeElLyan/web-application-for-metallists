@@ -88,8 +88,8 @@
     </#list>
 
 <#--    <#if (model.userBySession.id == model.user.id)>-->
-        <form method="post">
-            <a href="/logout">Logout</a>
+        <form method="get">
+            <a href="/WebApplicationForMetallists_war/logout">Logout</a>
         </form>
 <#--    </#if>-->
 </body>

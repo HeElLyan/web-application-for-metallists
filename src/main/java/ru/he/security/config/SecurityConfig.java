@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -53,17 +54,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .permitAll()
 
                 .and()
-                    .logout()
-                        .logoutUrl("/logout")
-                        .deleteCookies("remember-me")
+                .rememberMe()
+                    .rememberMeParameter("remember-me")
+                    .tokenRepository(tokenRepository())
 
                 .and()
-                    .rememberMe()
-                        .rememberMeParameter("remember-me")
-                        .tokenRepository(tokenRepository());
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/signIn")
+                    .deleteCookies("SESSION", "remember-me")
+                    .invalidateHttpSession(true)
+                    .permitAll();
 
-        //csrf token выключаем: когда страница отдается клиенту, сервер кладет на нее токен,затем с этим токеном отправляется форма, токен нормально оформлен или нет
-        http.csrf().disable();
+//        //csrf token выключаем: когда страница отдается клиенту, сервер кладет на нее токен,затем с этим токеном отправляется форма, токен нормально оформлен или нет
+//        сервер будет подписывать каждую страницу определенным csrf токеном
+//        http.csrf().disable();
     }
 
     @Bean

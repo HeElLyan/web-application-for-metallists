@@ -20,10 +20,12 @@
     <label for="password">Password
         <input class="input-field" type="password" id="password" name="password">
     </label>
-    <#--    <input type="password" name="password">-->
+
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <br>
     <label for="remember-me">
-        <input type="checkbox" id="remember-me" name="remember-me">Remember me</label>
+        <input type="checkbox" id="remember-me" name="remember-me">Remember me
+    </label>
     <input type="submit" value="SignIn">
     <br>
 </form>

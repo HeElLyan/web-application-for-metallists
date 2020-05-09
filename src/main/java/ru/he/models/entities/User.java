@@ -13,6 +13,7 @@ import ru.he.models.enums.roles.UserRole;
 import ru.he.models.enums.State;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -21,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

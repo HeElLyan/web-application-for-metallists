@@ -5,7 +5,7 @@ function sendMessage(bandId, text) {
     };
 
     $.ajax({
-        url: "/WebApplicationForMetallists_war/chat",
+        url: "/WebApplicationForMetallists_war/chat?band_id=" + bandId,
         method: "POST",
         data: JSON.stringify(body),
         contentType: "application/json",
@@ -21,7 +21,7 @@ function sendMessage(bandId, text) {
 // LONG POLLING
 function receiveMessage(bandId) {
     $.ajax({
-        url: "/WebApplicationForMetallists_war/chat?bandId=" + bandId,
+        url: "/WebApplicationForMetallists_war/chat?band_id=" + bandId,
         method: "GET",
         dataType: "json",
         contentType: "application/json",
