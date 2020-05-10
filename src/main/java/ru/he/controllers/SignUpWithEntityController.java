@@ -43,7 +43,7 @@ public class SignUpWithEntityController {
     }
 
     @PostMapping
-    public String signUp(@Valid RegDto regDto, Model model, BindingResult bindingResult) {
+    public String signUp(@Valid @ModelAttribute("regDto") RegDto regDto, Model model, BindingResult bindingResult) {
         signUpService.signUp(regDto);
         System.out.println(bindingResult.getAllErrors());
         model.addAttribute("regDto", regDto);

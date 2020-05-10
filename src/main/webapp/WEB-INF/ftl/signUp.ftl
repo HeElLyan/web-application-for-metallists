@@ -40,7 +40,7 @@
 <#--        <input class="input-field" placeholder="!!!!" type="email" id="email" name="email" required>-->
 <#--    </label>-->
 <#--    <br>-->
-<#--    <label for="city">Country-->
+<#--    <label for="city">City-->
 <#--        <input class="input-field" placeholder="!!!!" type="text" id="country" name="country">-->
 <#--    </label>-->
 <#--&lt;#&ndash;    <br>&ndash;&gt;-->
@@ -74,65 +74,62 @@
 
 <div>
     <@spring.bind "regDto"/>
-    <form action="/WebApplicationForMetallists_war/signUp" method="post">
-<#--        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
-        Username:
-        <@spring.formInput "regDto.username"/>
-        <@spring.showErrors "<br>","error"/>
-        <br>
-        Password:
-        <@spring.formInput "regDto.password"/>
-        <@spring.showErrors "<br>","error"/>
-
-        <br>
-        Email:
-        <@spring.formInput "regDto.email"/>
-        <@spring.showErrors "<br>"/>
-
-        <br>
-        First Name:
-        <@spring.formInput "regDto.firstName"/>
-        <@spring.showErrors "<br>","error"/>
-
-        <br>
-        Last Name:
-        <@spring.formInput "regDto.lastName"/>
-        <@spring.showErrors "<br>","error"/>
-
-        <br>
-        Country:
-        <@spring.formInput "regDto.country"/>
-        <@spring.showErrors "<br>","error"/>
-
-        <br>
-        City:
-        <@spring.formInput "regDto.city"/>
-        <@spring.showErrors "<br>","error"/>
+        <form action="/WebApplicationForMetallists_war/signUp" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+            <label for="username">Username</label>
+            <@spring.formInput "regDto.username"/>
+            <@spring.showErrors "<br>","error"/>
+            <br>
+            <label for="password">Password</label>
+            <@spring.formInput "regDto.password"/>
+            <@spring.showErrors "<br>","error"/>
+            <br>
+            <label for="email">Email</label>
+            <@spring.formInput "regDto.email"/>
+            <@spring.showErrors "<br>"/>
+            <br>
+            <label for="firstName">First Name</label>
+            <@spring.formInput "regDto.firstName"/>
+            <@spring.showErrors "<br>","error"/>
+            <br>
+            <label for="lastName">Last Name</label>
+            <@spring.formInput "regDto.lastName"/>
+            <@spring.showErrors "<br>","error"/>
+            <br>
+<#--            <label for="country">Country</label>-->
+<#--            Country:-->
+<#--            <@spring.formInput "regDto.country"/>-->
+<#--            <@spring.showErrors "<br>","error"/>-->
+<#--            <br>-->
+            <label for="city">City</label>
+            City:
+            <@spring.formInput "regDto.city"/>
+            <@spring.showErrors "<br>","error"/>
 
         <#--        <br><br>-->
 <#--        Age: <br>-->
 <#--        <@spring.formInput "profileForm.age"/>-->
 <#--        <@spring.showErrors "<br>","error"/>-->
-        <br>
-            <label for="metalGenre">Choose the metal genre
-                <select name="metalGenre">
-                <#list enumForMetalGenres as metalGenre>
-                    <option value=${metalGenre.value}>${metalGenre.value}</option>
-                </#list>
-                </select>
-            </label>
             <br>
-            <label for="instrumentType">Choose the metal instrument
-                <select name="instrumentType">
-                    <#list enumForInstruments as instrument>
-                        <option value=${instrument.value}>${instrument.value}</option>
-        <#--                <#if ${instrument.value}=="Progressivemetal"></#if>-->
+                <label for="metalGenre">Choose the metal genre
+                    <select name="metalGenre">
+                    <#list enumForMetalGenres as metalGenre>
+                        <option value=${metalGenre.value}>${metalGenre.value}</option>
                     </#list>
-                </select>
-            </label>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
+                    </select>
+                </label>
+                <br>
+                <label for="instrumentType">Choose the metal instrument
+                    <select name="instrumentType">
+                        <#list enumForInstruments as instrument>
+                            <option value=${instrument.value}>${instrument.value}</option>
+            <#--                <#if ${instrument.value}=="Progressivemetal"></#if>-->
+                        </#list>
+                    </select>
+                </label>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
 </div>
 </body>
 </html>

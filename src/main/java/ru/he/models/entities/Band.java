@@ -5,6 +5,7 @@ import lombok.*;
 import ru.he.models.enums.MetalGenre;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "band")
-public class Band {
+public class Band implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
