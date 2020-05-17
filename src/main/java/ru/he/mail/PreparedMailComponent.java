@@ -1,6 +1,7 @@
 package ru.he.mail;
 
 import lombok.Setter;
+//import ru.he.config.ApplicationContextConfig;
 import ru.he.config.AppConfig;
 
 import javax.activation.DataHandler;

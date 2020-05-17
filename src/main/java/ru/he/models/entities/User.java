@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 import ru.he.dto.RegDto;
 import ru.he.models.enums.InvitationState;
 import ru.he.models.enums.MetalGenre;
@@ -91,4 +92,10 @@ public class User implements Serializable {
 //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 //    List<FileInfo> fileInfos;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @Where(clause = "type = 'image/png'")  //hibernate
+    private List<Document> pngDocuments;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Document> documents;
 }

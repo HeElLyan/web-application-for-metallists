@@ -1,6 +1,7 @@
 package ru.he.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -23,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+//@Profile("mvc")
 @RequestMapping("/signUp")
 public class SignUpWithEntityController {
 

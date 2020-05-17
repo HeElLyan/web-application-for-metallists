@@ -1,6 +1,7 @@
 package ru.he.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +12,7 @@ import ru.he.models.entities.FileInfo;
 import ru.he.models.entities.User;
 import ru.he.models.enums.roles.UserInvitation;
 import ru.he.repositoriesJpa.FileInfoRepository;
-import ru.he.repositoriesJpa.UsersRepository;
+import ru.he.repositoriesEntityManager.UsersRepository;
 import ru.he.security.details.UserDetailsImpl;
 import ru.he.services.InvitationService;
 
@@ -22,6 +23,7 @@ import java.util.Optional;
 import static ru.he.dto.UserDto.from;
 
 @Controller
+//@Profile("mvc")
 public class MainController {
 
     @Autowired
@@ -33,19 +35,19 @@ public class MainController {
     @Autowired
     InvitationService invitationService;
 
-    @GetMapping("/main")
-    public ModelAndView getAllUsers(@RequestParam(value = "username", required = false) String username) {
-        List<User> users = null;
-
-        if (username != null) {
-            users = usersRepository.findAllByUsername(username);
-        } else {
-            users = usersRepository.findAll();
-        }
-        ModelAndView modelAndView = new ModelAndView("main");
-        modelAndView.addObject("users", users);
-        return modelAndView;
-    }
+//    @GetMapping("/main")
+//    public ModelAndView getAllUsers(@RequestParam(value = "username", required = false) String username) {
+//        List<User> users = null;
+//
+//        if (username != null) {
+//            users = usersRepository.findAllByUsername(username);
+//        } else {
+//            users = usersRepository.findAll();
+//        }
+//        ModelAndView modelAndView = new ModelAndView("main");
+//        modelAndView.addObject("users", users);
+//        return modelAndView;
+//    }
 
     @GetMapping("/main/{username}")
     public String getUserById(@PathVariable("username") String username, @ModelAttribute("model") ModelMap modelMap, Authentication authentication) {

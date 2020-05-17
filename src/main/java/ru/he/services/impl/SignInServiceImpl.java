@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.he.dto.AuthDto;
 import ru.he.dto.UserDto;
 import ru.he.models.entities.User;
-import ru.he.repositoriesJpa.UsersRepository;
+import ru.he.repositoriesEntityManager.UsersRepository;
 import ru.he.services.SignInService;
 
 @Component

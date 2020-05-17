@@ -46,8 +46,8 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableWebSecurity
 @EnableJdbcHttpSession
-//@EnableWebMvc
-public class AppConfig{
+@EnableWebMvc
+public class AppConfig implements WebMvcConfigurer{
 
 //    @Autowired
 //    private Environment environment;
@@ -90,7 +90,7 @@ public class AppConfig{
 
     @Bean
     public Configuration freemarkerConfiguration() {
-        Configuration configuration = new Configuration(Configuration.VERSION_2_3_29);
+        Configuration configuration = new Configuration(Configuration.VERSION_2_3_28);
         try {
             ServletContext servletContext = servletContextFactory().getObject();
             configuration.setServletContextForTemplateLoading(servletContext, "");

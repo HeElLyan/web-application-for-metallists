@@ -1,6 +1,7 @@
 package ru.he.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import java.util.Optional;
 import static ru.he.dto.UserDto.from;
 
 @Controller
+//@Profile("mvc")
 public class ProfileController {
 
     @Autowired

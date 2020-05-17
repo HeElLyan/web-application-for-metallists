@@ -34,9 +34,9 @@ public class SignUpServiceImpl implements SignUpService {
         String metalGenre = form.getMetalGenre();
 //        Instrument instrument = form.getInstrument();
         String instrumentType = form.getInstrumentType();
-        String country = form.getCountry();
+//        String country = form.getCountry();
         String city = form.getCity();
-        String about = form.getAbout();
+//        String about = form.getAbout();
 
         boolean isEmailAvailable = usersRepository.findByEmail(email).isEmpty();
         if (!isEmailAvailable) {
@@ -56,9 +56,9 @@ public class SignUpServiceImpl implements SignUpService {
                 .metalGenre(metalGenre)
                 .instrumentType(instrumentType)
 //                .instrument(instrument)
-                .country(country)
+//                .country(country)
                 .city(city)
-                .about(about)
+//                .about(about)
                 .state(State.UNCONFIRMED)
                 .confirmId(confirmId)
                 .userRole(UserRole.USER)

@@ -1,7 +1,10 @@
 package ru.he.repositoriesJpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import ru.he.dto.InformationDto;
 import ru.he.models.entities.User;
 
 import java.util.List;
@@ -15,5 +18,8 @@ public interface UsersRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
     Optional<User> findById(Long id);
     List<User> findAllByUsername(String username);
-//    void update(User user);
+
+//    @Query("select new ru.he.dto.InformationDto(user.name, (sum(document.size) / 1024 / 1024) ) from User user left join user.documents " +
+//            "as document where user.id = :userId group by user.id")
+//    InformationDto getInformationByUser(@Param("userId") Long userId);
 }

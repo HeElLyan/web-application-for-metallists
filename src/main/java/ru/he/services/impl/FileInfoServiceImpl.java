@@ -42,7 +42,7 @@ public class FileInfoServiceImpl implements FileInfoService {
     }
 
     @Override
-    public void save(FileInfo fileInfo) {
+    public FileInfo save(FileInfo fileInfo) {
         LocalDateTime now = LocalDateTime.now();
         MultipartFile multipartFile = fileInfo.getMultipartFile();
 
@@ -66,6 +66,6 @@ public class FileInfoServiceImpl implements FileInfoService {
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
-        fileInfoRepository.save(fileInfo);
+        return fileInfoRepository.save(fileInfo);
     }
 }

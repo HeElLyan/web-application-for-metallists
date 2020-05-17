@@ -9,6 +9,6 @@ public interface FileInfoService {
 
     Resource getResourceByFileInfo(FileInfo fileInfo);
 
-    void save(FileInfo fileInfo);
+    FileInfo save(FileInfo fileInfo);
 
 }

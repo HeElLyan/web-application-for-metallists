@@ -1,23 +1,24 @@
 //package ru.he.controllers.rest;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Profile;
+//import org.springframework.http.MediaType;
 //import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.bind.annotation.*;
 //import ru.he.dto.AuthDto;
-//import ru.he.dto.TokenDto;
-//import ru.he.services.SignInWithTokenService;
+//import ru.he.dto.UserDto;
+//import ru.he.services.SignInService;
 //
 ////будет сразу тело, сконвертированное в json
 //@RestController
+//@Profile("rest")
 //public class RestSignInController {
 //
 //    @Autowired
-//    private SignInWithTokenService signInWithTokenService;
+//    private SignInService signInService;
 //
-//    @PostMapping("/login")
-//    public ResponseEntity<TokenDto> login(@RequestBody AuthDto authDto) {
-//        return ResponseEntity.ok(signInWithTokenService.login(authDto));
+//    @RequestMapping(value = "/signIn", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<UserDto> login(@RequestBody AuthDto authDto) {
+//        return ResponseEntity.ok(signInService.signIn(authDto));
 //    }
 //}

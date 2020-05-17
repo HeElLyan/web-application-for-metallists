@@ -102,7 +102,6 @@
 <#--            <@spring.showErrors "<br>","error"/>-->
 <#--            <br>-->
             <label for="city">City</label>
-            City:
             <@spring.formInput "regDto.city"/>
             <@spring.showErrors "<br>","error"/>
 
