@@ -27,13 +27,13 @@ import static ru.he.dto.UserDto.from;
 public class MainController {
 
     @Autowired
-    FileInfoRepository fileInfoRepository;
+    private FileInfoRepository fileInfoRepository;
 
     @Autowired
-    UsersRepository usersRepository;
+    private UsersRepository usersRepository;
 
     @Autowired
-    InvitationService invitationService;
+    private InvitationService invitationService;
 
 //    @GetMapping("/main")
 //    public ModelAndView getAllUsers(@RequestParam(value = "username", required = false) String username) {

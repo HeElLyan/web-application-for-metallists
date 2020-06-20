@@ -14,9 +14,9 @@
         <property name="url" value="jdbc:mysql://localhost:3306/database_for_metallists?useUnicode=true&amp;serverTimezone=UTC&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"/>
     </bean>
 
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    <!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>-->
 
-    <mvc:resources mapping="/WEB-INF/**" location="/WEB-INF/" />
-    <mvc:resources mapping="/res/**" location="/res/" />
+    <!--    <mvc:resources mapping="/WEB-INF/**" location="/WEB-INF/" />-->
+    <!--    <mvc:resources mapping="/res/**" location="/res/" />-->
     <mvc:annotation-driven/>
 </beans>

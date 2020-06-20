@@ -29,7 +29,6 @@ import java.util.Optional;
 import static ru.he.dto.UserDto.from;
 
 @Controller
-//@Profile("mvc")
 public class ProfileController {
 
     @Autowired
@@ -38,8 +37,6 @@ public class ProfileController {
     @Autowired
     private FileInfoRepository fileInfoRepository;
 
-    @Autowired
-    private UsersRepository usersRepository;
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, Authentication authentication) {
@@ -59,23 +56,16 @@ public class ProfileController {
         UserDto userBySession = from(details.getUser());
         model.addAttribute("user", userBySession);
 
-        //так не работает, security не дает похоже
-//        String email = (String) session.getAttribute("user-email");
 
         String email = userBySession.getEmail();
         List<FileInfo> fileInfos = fileInfoRepository.findAllByEmail(email);
         model.addAttribute("files", fileInfos);
 
-//        Optional<User> user = usersRepository.findByUsername(username);
-//        model.addAttribute("user", user);
-
         return "profile";
     }
 
     @PostMapping("/")
-    public String uploadFileView(@RequestParam("file") MultipartFile multipartFile, HttpSession session, ModelMap model, Authentication authentication) {
-//        String email = (String) session.getAttribute("user-email");
-//        System.out.println("Email from current session: " + email);
+    public String uploadFileView(@RequestParam("file") MultipartFile multipartFile, Authentication authentication) {
 
         UserDetailsImpl details = (UserDetailsImpl)authentication.getPrincipal();
         UserDto user = from(details.getUser());
@@ -87,9 +77,6 @@ public class ProfileController {
 
         fileInfoService.save(fileInfo);
 
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("file_url", fileInfo.getStorageFileName());
-//        modelAndView.setViewName("fileUploaded");
         return "redirect:/";
     }
 

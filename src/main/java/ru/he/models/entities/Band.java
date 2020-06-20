@@ -31,9 +31,9 @@ public class Band implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private MetalGenre metalGenre;
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    private List<User> participants;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Message> messages;
 
-//    @OneToOne(fetch = FetchType.EAGER)
-//    private User user;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<User> participants;
 }

@@ -9,6 +9,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -36,6 +38,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 @org.springframework.context.annotation.Configuration
@@ -71,6 +74,29 @@ public class AppConfig implements WebMvcConfigurer{
 //    public void addResourceHandlers(ResourceHandlerRegistry resourceHandlerRegistry){
 //        resourceHandlerRegistry.addResourceHandler()
 //    }
+
+//    @Bean
+//    public JdbcTemplate jdbcTemplate() {
+//        return new JdbcTemplate(driverManagerDataSource());
+//    }
+//
+//    @Bean(name = "DriverManagerDataSource")
+//    public DataSource driverManagerDataSource() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("db.driver")));
+//        dataSource.setUrl(environment.getProperty("db.url"));
+//        dataSource.setUsername(environment.getProperty("db.user"));
+//        dataSource.setPassword(environment.getProperty("db.password"));
+//        return dataSource;
+//    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/img/**").addResourceLocations("/WEB-INF/img/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/js/");
+        registry.addResourceHandler("/ftl/**").addResourceLocations("/WEB-INF/ftl/");
+        registry.addResourceHandler("/**").addResourceLocations("/WEB-INF/**");
+    }
 
     @Bean
     public EmbeddedDatabase dataSource() {

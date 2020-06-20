@@ -28,19 +28,19 @@ import static ru.he.dto.UserDto.from;
 public class ChatController {
 
     @Autowired
-    UsersRepository usersRepository;
+    private UsersRepository usersRepository;
 
     @Autowired
-    MessageRepository messageRepository;
+    private MessageRepository messageRepository;
 
     @Autowired
-    CashedIdPool cashedIdPool;
+    private CashedIdPool cashedIdPool;
 
     @Autowired
-    TimeResolverLocalDateTime timeResolver;
+    private TimeResolverLocalDateTime timeResolver;
 
     @Autowired
-    BandRepository bandRepository;
+    private BandRepository bandRepository;
 
 //    @GetMapping(name="/chat", value = "/chat", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     @GetMapping("/chat")
@@ -67,32 +67,36 @@ public class ChatController {
 
         UserDetailsImpl details = (UserDetailsImpl)authentication.getPrincipal();
         UserDto userBySession = from(details.getUser());
-        Optional<User> user = usersRepository.findById(userBySession.getId());
-        modelAndView.addObject("user", user.get());
 
-        Optional<Band> band = bandRepository.findById(bandId);
-        modelAndView.addObject("band", band.get());
+        User user = usersRepository.findById(userBySession.getId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        modelAndView.addObject("user", user);
+
+        Band band = bandRepository.findById(bandId)
+                .orElseThrow(() -> new IllegalArgumentException("Band not found"));
+        modelAndView.addObject("band", band);
         return modelAndView;
     }
 
 //    @PostMapping(name="/chat", value = "/chat", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     @PostMapping("/chat")
     @ResponseStatus(value = HttpStatus.OK)
-    public void receiveMessage(@RequestParam("band_id") Long bandId, @RequestParam("text") String text, Authentication authentication,ModelMap model) {
+    public void receiveMessage(@RequestParam("band_id") Long bandId, @RequestParam("text") String text, Authentication authentication) {
         UserDetailsImpl details = (UserDetailsImpl)authentication.getPrincipal();
         UserDto userBySession = from(details.getUser());
 
-        Optional<User> user = usersRepository.findById(userBySession.getId());
-        Optional<Band> band = bandRepository.findById(bandId);
+        User user = usersRepository.findById(userBySession.getId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        Band band = bandRepository.findById(bandId)
+                .orElseThrow(() -> new IllegalArgumentException("Band not found"));
 
         Message message = Message.builder()
-                .band(band.get())
-                .user(user.get())
+                .band(band)
+                .user(user)
                 .text(text)
                 .createdAt(timeResolver.now())
                 .build();
 
-//        model.addAttribute("message", message);
         messageRepository.save(message);
 
         bandId = cashedIdPool.cashedOf(bandId);
