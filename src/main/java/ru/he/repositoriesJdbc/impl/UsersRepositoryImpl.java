@@ -19,7 +19,6 @@ import java.util.Optional;
 
 @Component
 public class UsersRepositoryImpl implements UsersRepository {
-
     //language=SQL
     public static final String SQL_SELECT_ALL = "SELECT * FROM user";
 
